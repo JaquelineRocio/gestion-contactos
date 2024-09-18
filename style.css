@@ -73,10 +73,10 @@ button#addContact {
   background: #475569;
   border: none;
   color: #fff;
-  padding: 4px 16px 4px 16px;
+
   cursor: pointer;
   border-radius: 16px;
-  width: 83px;
+  width: 70px;
   height: 30px;
   font-size: 12px;
   font-weight: 700;
@@ -89,10 +89,10 @@ button#addContact {
   background: #475569;
   border: none;
   color: #fff;
-  padding: 4px 16px;
+
   cursor: pointer;
   border-radius: 16px;
-  width: 83px;
+  width: 70px;
   height: 30px;
   font-size: 12px;
   font-weight: 700;
