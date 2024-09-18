@@ -1,16 +1,17 @@
 const boton = document.querySelector("#addContact");
 const contactos = [];
 const contactList = document.querySelector("#contactList");
+
 boton.addEventListener("click", () => {
   let inputValue = document.querySelector("#contactName").value.trim();
   const existeContacto = contactos.indexOf(inputValue);
 
   if (inputValue === "") {
     alert("El campo no puede estar vacío ni contener solo espacios.");
-    return false; // Evita que el formulario se envíe
-  } else if (!existeContacto) {
+    return false;
+  } else if (existeContacto !== -1) {
     alert("No puede agregar contactos repetidos");
-    return false; // Evita que el formulario se envíe
+    return false;
   } else {
     contactos.push(inputValue);
 
@@ -54,15 +55,28 @@ function actualizarElemento(event) {
   const li = boton.parentElement;
   const inputContactName = li.querySelector("input");
   const buttonEdit = li.querySelector(".button-edit");
+  let inputValue = inputContactName.value.trim();
 
   if (buttonEdit.innerText === "Actualizar") {
     inputContactName.disabled = false;
     buttonEdit.innerText = "Guardar";
   } else {
-    const index = Array.from(contactList.children).indexOf(li);
-    contactos[index] = inputContactName.value;
-    inputContactName.disabled = true;
-    buttonEdit.innerText = "Actualizar";
-    console.log(contactos);
+    const existeContacto = contactos.indexOf(inputValue);
+
+    if (inputValue.trim() === "") {
+      alert("El campo no puede estar vacío ni contener solo espacios.");
+      return false;
+    } else if (
+      existeContacto !== -1 &&
+      existeContacto !== Array.from(contactList.children).indexOf(li)
+    ) {
+      alert("No puede agregar contactos repetidos");
+      return false;
+    } else {
+      const index = Array.from(contactList.children).indexOf(li);
+      contactos[index] = inputValue;
+      inputContactName.disabled = true;
+      buttonEdit.innerText = "Actualizar";
+    }
   }
 }
