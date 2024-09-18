@@ -2,9 +2,16 @@ const boton = document.querySelector("#addContact");
 const contactos = [];
 const contactList = document.querySelector("#contactList");
 boton.addEventListener("click", () => {
-  let inputValue = document.querySelector("#contactName").value;
+  let inputValue = document.querySelector("#contactName").value.trim();
   const existeContacto = contactos.indexOf(inputValue);
-  if (inputValue != "" && existeContacto) {
+
+  if (inputValue === "") {
+    alert("El campo no puede estar vacío ni contener solo espacios.");
+    return false; // Evita que el formulario se envíe
+  } else if (!existeContacto) {
+    alert("No puede agregar contactos repetidos");
+    return false; // Evita que el formulario se envíe
+  } else {
     contactos.push(inputValue);
 
     const li = document.createElement("li");
