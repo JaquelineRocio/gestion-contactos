@@ -1,24 +1,36 @@
+const app = document.querySelector("#app");
+
 const boton = document.querySelector("#addContact");
-const contactos = [];
 const contactList = document.querySelector("#contactList");
+const contactos = JSON.parse(localStorage.getItem("contactos")) || [];
+const contadorContainer = document.createElement("div");
+const sortButton = document.createElement("button");
 
-boton.addEventListener("click", () => {
-  let inputValue = document.querySelector("#contactName").value.trim();
-  const existeContacto = contactos.indexOf(inputValue);
+app.appendChild(contadorContainer);
+app.appendChild(sortButton);
 
-  if (inputValue === "") {
-    alert("El campo no puede estar vacío ni contener solo espacios.");
-    return false;
-  } else if (existeContacto !== -1) {
-    alert("No puede agregar contactos repetidos");
-    return false;
-  } else {
-    contactos.push(inputValue);
+contadorContainer.innerText = `Cantidad de contactos: ${contactos.length}`;
+sortButton.innerText = "Ordenar alfabéticamente";
+sortButton.addEventListener("click", ordenarContactos);
 
+// Función para actualizar el contador
+function actualizarContador() {
+  contadorContainer.innerText = `Cantidad de contactos: ${contactos.length}`;
+}
+
+// Función para guardar contactos en localStorage
+function guardarContactos() {
+  localStorage.setItem("contactos", JSON.stringify(contactos));
+}
+
+// Función para renderizar la lista de contactos
+function renderContactList() {
+  contactList.innerHTML = "";
+  contactos.forEach((contacto) => {
     const li = document.createElement("li");
     li.className = "contact-item";
     const inputContactName = document.createElement("input");
-    inputContactName.value = inputValue;
+    inputContactName.value = contacto;
     inputContactName.disabled = true;
     li.appendChild(inputContactName);
 
@@ -34,6 +46,24 @@ boton.addEventListener("click", () => {
     buttonEdit.addEventListener("click", actualizarElemento);
     li.appendChild(buttonEdit);
     contactList.appendChild(li);
+  });
+}
+
+boton.addEventListener("click", () => {
+  let inputValue = document.querySelector("#contactName").value.trim();
+  const existeContacto = contactos.indexOf(inputValue);
+
+  if (inputValue === "") {
+    alert("El campo no puede estar vacío ni contener solo espacios.");
+    return false;
+  } else if (existeContacto !== -1) {
+    alert("No puede agregar contactos repetidos");
+    return false;
+  } else {
+    contactos.push(inputValue);
+    guardarContactos();
+    renderContactList();
+    actualizarContador();
   }
 });
 
@@ -44,10 +74,11 @@ function eliminarElemento(event) {
 
   if (index > -1) {
     contactos.splice(index, 1);
+    guardarContactos();
   }
 
-  contactList.removeChild(li);
-  console.log(contactos);
+  renderContactList();
+  actualizarContador();
 }
 
 function actualizarElemento(event) {
@@ -75,8 +106,20 @@ function actualizarElemento(event) {
     } else {
       const index = Array.from(contactList.children).indexOf(li);
       contactos[index] = inputValue;
+      guardarContactos();
       inputContactName.disabled = true;
       buttonEdit.innerText = "Actualizar";
     }
   }
 }
+
+// Función para ordenar contactos alfabéticamente
+function ordenarContactos() {
+  contactos.sort((a, b) => a.localeCompare(b));
+  guardarContactos();
+  renderContactList();
+}
+
+// Inicializar la lista de contactos y contador
+renderContactList();
+actualizarContador();
