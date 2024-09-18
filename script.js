@@ -16,7 +16,7 @@ boton.addEventListener("click", () => {
     contactos.push(inputValue);
 
     const li = document.createElement("li");
-
+    li.className = "contact-item";
     const inputContactName = document.createElement("input");
     inputContactName.value = inputValue;
     inputContactName.disabled = true;

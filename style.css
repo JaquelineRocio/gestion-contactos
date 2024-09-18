@@ -1,0 +1,107 @@
+body {
+  font-family: Roboto, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+}
+
+#app {
+  background: #f2f2f2;
+  padding: 0px, 16px, 0px, 16px;
+  gap: 16px;
+  width: 375px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 0;
+}
+
+#contactName {
+  width: 319.8px;
+  height: 50px;
+  border-radius: 16px;
+  border: 2px solid #4f4f4f;
+  padding: 16px;
+  word-wrap: break-word;
+  word-break: break-all;
+  font-size: 20px;
+}
+
+button#addContact {
+  padding: 8px 16px 8px 16px;
+  width: 343px;
+  height: 45px;
+  border: none;
+  gap: 8px;
+  background-color: #28a745;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 16px;
+  font-weight: 700;
+  font-size: 24px;
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+}
+
+button#addContact {
+  background-color: #218838;
+}
+
+#contactList {
+  list-style: none;
+  padding: 0;
+}
+
+.contact-item {
+  background: #ffffff;
+  padding: 16px;
+  width: 310px;
+  margin-bottom: 10px;
+  border: 2px solid #4f4f4f;
+  border-radius: 16px;
+  display: flex;
+}
+
+.button-delete {
+  background: #475569;
+  border: none;
+  color: #fff;
+  padding: 4px 16px 4px 16px;
+  cursor: pointer;
+  border-radius: 16px;
+  width: 83px;
+  height: 30px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.button-delete:hover {
+  background: #c82333;
+}
+.button-edit {
+  background: #475569;
+  border: none;
+  color: #fff;
+  padding: 4px 16px;
+  cursor: pointer;
+  border-radius: 16px;
+  width: 83px;
+  height: 30px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.button-edit:hover {
+  background: #563d7c;
+}
+.button-container {
+  display: flex;
+  justify-content: space-between;
+}
